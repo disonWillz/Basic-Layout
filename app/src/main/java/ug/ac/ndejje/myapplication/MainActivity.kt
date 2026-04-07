@@ -21,6 +21,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.*
 
 
 class MainActivity : ComponentActivity() {
@@ -38,6 +39,8 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun ProfileCard() {
+    var isFollowing by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,9 +57,11 @@ fun ProfileCard() {
             modifier = Modifier.padding(top = 16.dp),
         )
         Button(
-            onClick = { }
+            onClick = { isFollowing = !isFollowing }
         ){
-            Text(text = "Follow")
+            Text(
+                text = if (isFollowing) "Following" else "Follow"
+            )
         }
     }
 }
